@@ -1,0 +1,161 @@
+{% include "__breadcumb.html" %}
+
+<div class="row">
+	<div class="col-md-12">
+		<div class="col-md-2">
+				<br />
+				<p><strong>Group</strong></p>
+				<ul>
+			    	<li class="active"><a href="/api_test/group/user_system/" class="specific-service">user system</a></li>
+			    	<li class=""><a href="/api_test/group/cms/" class="specific-service">cms</a></li>
+			    	<li class=""><a href="/api_test/group/data/" class="specific-service">data</a></li>
+				</ul>
+				<br /><br /><br />
+				<p>时间段<p>
+				<select class="form-control" id="period-picker">
+				  <option value="6" selected="selected">3小时</option>
+				  <option value="48" >1天</option>
+				  <option value="336">1周</option>
+				</select>
+		</div>
+		
+		
+		<div class="col-md-10 main-view" id="main-view">
+		<div class="row-fluid">
+		    <div class="table-responsive">
+		        <h2 id="api-group"></h2>
+				<p id="api-times"></p>
+				<br>
+				<h4>以下为错误信息：</h4>
+				<table class="table table-condensed table-hover data-table" style="text-align:left;" id="api-table">
+					<thead>
+						<tr>
+							<th> # </th>
+							<th>Url</th>
+							<th>Error No</th>
+							<th>Error Msg</th>
+							<th>Time</th>
+						</tr>
+					</thead>
+					<tbody>
+					</tbody>
+				</table>
+		    </div>
+		</div>
+		</div>
+	</div>
+</div>
+
+<script>
+var last_request_service = null;
+
+$(document).ready(function(){
+//  base_ready();
+
+  $(document).on("change", "#period-picker", function(e){
+    if (last_request_service){
+      var period = $(this).find("option:selected").val();
+      var href = last_request_service + period;
+      rev_data(href);
+    }
+  })
+
+  $(document).on("click", ".specific-service", function(e){
+    e.preventDefault();
+    var achor = $(this);
+    var href = achor.prop("href");
+    last_request_service = href;
+    var period = $("#period-picker option:selected").val();
+    href = href + period;
+    rev_data(href);
+  })
+
+  $(".specific-service").first().click();
+  
+})
+
+function rev_data(href){
+  get_json(href, null, function(data, self_data){  
+  
+  	var err_data = data['data']['err_datas'];
+  	var times = data['data']['times'];
+  	var success = data['data']['success_times'];
+  	var group = data['data']['group']
+  	var last = data['data']['last']
+
+  	var table = document.getElementById("api-table");
+  	var rowNum = table.rows.length;
+  	for (i=1; i<rowNum; i++){
+  		table.deleteRow(i);
+  		rowNum = rowNum - 1;
+  		i = i-1;
+  	}
+  	
+  	$.each(err_data, function(n, value){
+  	  	insert_table(n, value);
+  	});
+  	
+  	document.getElementById("api-group").innerHTML = group;
+  	document.getElementById("api-times").innerHTML = "该时间段内测试共执行"+times.toString()+
+  		"次，成功"+success.toString()+"次，最后一次执行成功的时间："+last;
+  	
+  });
+}
+
+function insert_table(n, data){
+	var table = document.getElementById("api-table");
+	var oTr = table.insertRow();
+	var oTd = oTr.insertCell(0);
+	oTd.innerHTML = n+1;
+	var oTd = oTr.insertCell(1);
+	oTd.innerHTML = data.url;
+	var oTd = oTr.insertCell(2);
+	oTd.innerHTML = data.err_no;
+	var oTd = oTr.insertCell(3);
+	oTd.innerHTML = data.err_msg;
+	var oTd = oTr.insertCell(4);
+	oTd.innerHTML = data.time;
+}
+
+
+function get_json(url, in_data, call_back){
+  if (!call_back){
+    call_back = function(data, self_data){
+      $("#main-view").html(data["data"])
+    }
+  }
+  ajax('GET', url, in_data, call_back, false)
+}
+
+function ajax(type, url, in_data, call_back, origin){
+  $.ajax({
+		type: type,
+		url: url,
+    data: in_data,
+  	success: function(data){
+      if (origin){
+        call_back(data, in_data)
+      } else {
+        var result = eval("("+data+")")
+    		if (result['errorno'] === 1){
+    			common_error_show(result['errormsg'])
+    		} else {
+    			call_back(result, in_data)
+    		}
+      } // end else
+  	} // end success function
+  }) // end ajax
+}
+
+function common_msg_show(title, msg){
+  var modal = $("#result_modal")
+  modal.find(".modal_title").text(title)
+  modal.find(".modal_body").html(msg)
+  modal.modal()
+}
+
+function common_error_show(msg){
+  common_msg_show("Error", msg)
+}
+
+</script>

@@ -1,0 +1,21 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>{% block title %} {% endblock %}</title>
+    <link rel="stylesheet" href="{% static "js/lib/bootstrap/dist/css/bootstrap.css" %}"/>
+    <link href="{% static "hm.css" %}" rel="stylesheet">
+    
+    <script src="{% static "js/lib/jquery/dist/jquery.min.js" %}"></script>
+    <script src="{% static "js/lib/bootstrap/dist/js/bootstrap.js" %}"></script>
+</head>
+<body style="padding-top: 50px;">
+{% block nav %}{% endblock %}
+<div class="container-fluid" style="padding-left: 0; padding-right: 0;">
+    {% block content %}{% endblock %}
+    {% block model %}{% endblock %}
+</div>
+</body>
+</html>
+

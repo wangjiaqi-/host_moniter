@@ -1,0 +1,12 @@
+{% extends "__base.html" %}
+
+{% block content %}
+<!--    <div class="col-md-2" style="padding-top: 20px; position: fixed;overflow-x: hidden;overflow-y: auto;height: 100%;border-right: 3px solid #eee;background-color: #3D3D3D;">
+-->
+	<div class="col-md-2 slide_left">
+        {% block slide_left %}{% endblock %}
+    </div>
+    <div class="col-md-10 pull-right" style="padding-top:20px;">
+        {% block slide_right %}{% endblock %}
+    </div>
+{% endblock %}

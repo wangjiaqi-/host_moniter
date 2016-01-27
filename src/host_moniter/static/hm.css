@@ -1,0 +1,119 @@
+body {
+  padding-top: 50px;
+}
+table{
+  text-align: center;
+}
+th {
+  text-align: center;
+}
+img {
+  height: 100%;
+}
+#playbook-struct{
+  width: auto;
+  height: 200px;
+}
+#top-navbar {
+  background-color: #000000;
+}
+
+#top-tabs a{
+  color: #FFF;
+  background-color: #BE0010;
+}
+
+.btn-group {
+  padding-top: 10px;
+}
+
+.slide_left {
+  padding-top: 20px;
+  position: absolute;
+  overflow-x: hidden;
+  overflow-y: auto;
+  height: 300%;
+  border-right: 3px solid #eee;
+  background-color: #3D3D3D;
+}
+
+.slide_left a{
+  color: #FFF;
+}
+.slide_left a:hover{
+  color: #E12F7A;
+}
+.main-view {
+  padding: 20px;
+}
+
+.slide_left li[class="active"]{
+  background-color: #BE0010;
+}
+
+.right-view {
+  padding-top: 20px;
+}
+
+@font-face {
+    font-family: "font awesome";
+    src:url('../font/fontawesome-webfont.eot');
+    src:url('../font/fontawesome-webfont.eot?#iefix') format('embedded-opentype'),
+    url('../font/fontawesome-webfont.woff') format('woff'),
+    url('../font/fontawesome-webfont.ttf') format('truetype'),
+    url('../font/fontawesome-webfont.svg#flexslider-icon') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+div.panel, p.flip, .opgroup-title{
+  margin: 0px;
+  padding: 5px;
+  background: #e5eecc;
+  border: solid 1px #c3c3c3;
+  text-align: center;
+}
+
+.output-block, h2{
+  margin: 0px;
+  padding: 5px;
+  background: #e6e6e6;
+  border: solid 1px #c3c3c3;
+}
+
+.output-block {
+  height:400px;
+  width: 100%;
+  resize: none;
+  color: #ffffff;
+  background-color:#323232;
+}
+
+.outer {
+  text-align: center;
+  vertical-align: middle;
+  height: 1000px;
+  padding: 25px;
+  overflow: hidden;
+}
+
+button.center {
+  vertical-align: center;
+}
+
+.group-form {
+  height: 150px;
+  background: #c3c3c3;
+}
+
+.normal-pad {
+  padding: 5px;
+}
+
+.adjust-pad {
+  padding: 40px;
+}
+
+.bg-box {
+  background: #e6e6e6;
+}

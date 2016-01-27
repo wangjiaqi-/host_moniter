@@ -1,0 +1,18 @@
+{% extends "__slide.html" %}
+
+{% block nav %}
+    {% include "__l_nav.html" %}
+{% endblock %}
+
+{% block slide_left %}
+<ul class="nav nav-stacked sidebar">
+    <li class="active"><a href="{% url "index" %}">HOST</a></li>
+    <li class=""><a href="{% url "add_host_page" %}">ADD HOST</a></li>
+    <li class=""><a href="{% url "api_test" %}">API TEST</a></li>
+    <li class=""><a href="{% url "test" %}">TEST</a></li>
+</ul>
+{% endblock %}
+
+{% block slide_right %}
+    {% include "__hosts.html" %}
+{% endblock %}

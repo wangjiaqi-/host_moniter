@@ -1,0 +1,11 @@
+<div class="row-fluid">
+    <ol class="breadcrumb">
+        {% for item in breadcrumb %}
+            {% if forloop.last %}
+                <li>{{ item.name }}</li>
+            {% else %}
+                <li class="active"><a href="{{ item.url }}">{{ item.name }}</a></li>
+            {% endif %}
+        {% endfor %}
+    </ol>
+</div>

@@ -1,0 +1,36 @@
+{% include "__breadcumb.html" %}
+<div class="row-fluid">
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <td>#</td>
+                <td>项目</td>
+                <td>IP</td>
+               	<td>CPU</td>
+               	<td>Disk</td>
+               	<td>Memory</td>
+               	<td>Network Bandwidth</td>
+               	<td>Time</td>
+            </tr>
+            </thead>
+            <tbody>
+            {% for host in hosts %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ host.name }}</td>
+                    <td>{{host.ip}}</td>
+                    <td>{{host.cpu}}</td>
+                    <td>{{host.disk_per}}</td>
+                    <td>{{host.mem}}</td>
+                    <td>{{host.net_bandwidth}}</td>
+                    <td>{{host.time}}</td>
+                    <td>
+                        <a href="{% url "details" host.ip %}">查看&nbsp;</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
